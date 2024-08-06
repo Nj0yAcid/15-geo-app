@@ -25,6 +25,12 @@ pipeline{
                 sh 'curl -uadmin:AP6gCHaGvbw5kdFyGsCnMa2u4XR -T target/bio*.jar "http://54.227.153.15:8081/artifactory/geolocation/geo/bio_${BUILD_ID}.jar"'
             }
         }
+
+        stage('docker login'){
+            steps{
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211125431540.dkr.ecr.us-east-1.amazonaws.com'
+            }
+        }
     }
     
 }
